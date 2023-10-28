@@ -1,0 +1,15 @@
+{
+    "name": "gotyefrid/comebackpw-parser",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Gotyefrid\\ComebackpwParser\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "gotyefrid"
+        }
+    ],
+    "require": {}
+}
