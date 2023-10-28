@@ -11,6 +11,11 @@
             "name": "gotyefrid"
         }
     ],
+    "require": {
+        "php": "^8.0",
+        "phpquery/phpquery": "^0.0.4",
+        "ext-dom": "*"
+    },
     "require-dev": {
         "codeception/codeception": "4.2.2",
         "codeception/module-phpbrowser": "^1.0.0",
