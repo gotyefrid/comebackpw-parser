@@ -2,6 +2,7 @@
 
 namespace Gotyefrid\ComebackpwParser\Services\Parser;
 
+use Exception;
 use Gotyefrid\ComebackpwParser\Base\BaseObject;
 use Gotyefrid\ComebackpwParser\Models\BaseItem;
 use Gotyefrid\ComebackpwParser\Models\Shop;
@@ -15,7 +16,7 @@ class ParserService extends BaseObject
 {
     public string $version = '146x';
     public string $mainUrl = 'https://comeback-pw.translate.goog/cats/';
-    public int $engine = 1;
+    public string $shopUrl = 'https://comeback-pw.translate.goog/cats/';
     public ?DomFinderInterface $domFinder = null;
 
     public const TYPE_ALL = 1;
@@ -23,10 +24,6 @@ class ParserService extends BaseObject
     public const TYPES = [
         self::TYPE_ALL => 'all',
         self::TYPE_ARMOR => 'armor'
-    ];
-    public const ENGINE_WGET = 1;
-    public const ENGINES = [
-        self::ENGINE_WGET => 'wget'
     ];
 
     public bool $isLastPage = true;
@@ -45,8 +42,8 @@ class ParserService extends BaseObject
         $page = 1;
 
         do {
-            $shops = $this->getAllShopsFromPage($page);
-            $this->getItemsFromShops($shops);
+            $shopsHtml = $this->getShopsHtml($page);
+            $shops = $this->createShops($shopsHtml);
 
             $this->isLastPage = false;
             $page++;
@@ -56,46 +53,59 @@ class ParserService extends BaseObject
     /**
      * @param int $page
      * @return Shop[]
+     * @throws Exception
      */
-    public function getAllShopsFromPage(int $page): array
+    public function getShopsHtml(int $page): array
     {
-        $html = $this->getHtml(['page' => $page]);
+        $html = $this->getHtml($this->getMainUrl(['page' => $page]));
 
-        if ($this->isHtmlValid($html)) {
-            return $this->domFinder->getFilledItems($html);
+        if ($this->isMainHtmlValid($html)) {
+            return $this->domFinder->getShopsHtml($html);
+        } else {
+            throw new Exception('Основной html невалидный');
         }
 
         return [];
     }
 
-    private function getHtml(array $query): string
+    private function getHtml(string $url): string
     {
-        $html = match ($this->engine) {
-            self::ENGINE_WGET => file_get_contents($this->getUrl($query))
-        };
-
-        return $html;
+        return file_get_contents($url);
     }
 
     /**
      * @param array $query
      * @return string
      */
-    public function getUrl(array $query): string
+    public function getMainUrl(array $query): string
     {
-        $queryBase = [
+        $query = http_build_query(array_merge($this->getBaseQuery(), $query));
+
+        return $this->mainUrl . $this->version . "?$query";
+    }
+
+    private function getBaseQuery(): array
+    {
+        return [
             '_x_tr_sl' => 'en',
             '_x_tr_tl' => 'ru',
             '_x_tr_hl' => 'ru',
             '_x_tr_pto' => 'wapp',
         ];
-
-        $query = http_build_query(array_merge($queryBase, $query));
-
-        return $this->mainUrl . $this->version . "?$query";
     }
 
-    private function isHtmlValid(string $html)
+    public function getShopUrl(int $shopId): string
+    {
+        $query = [
+            'shop' => $shopId
+        ];
+
+        $query = http_build_query(array_merge($this->getBaseQuery(), $query));
+
+        return $this->shopUrl . $this->version . "?$query";
+    }
+
+    private function isMainHtmlValid(string $html): bool
     {
         return str_contains($html, '<div id="content">');
     }
@@ -111,5 +121,27 @@ class ParserService extends BaseObject
                 $shop->items = $this->domFinder->getItemsMain($shop->html);
             }
         }
+    }
+
+    private function createShops(array $shopsHtml)
+    {
+        foreach ($shopsHtml as $shopHtml) {
+            $isExistMore = $this->domFinder->isExistMore($shopHtml);
+
+            if ($isExistMore) {
+                $shopId = $this->domFinder->getShopId($shopHtml);
+                $shopHtml = $this->getHtml($this->getShopUrl($shopId));
+                $shopHtml = $this->domFinder->getShopHtml($shopHtml);
+            }
+
+            $shops[] = new Shop($shopHtml, [
+                'isExistMore' => $isExistMore
+            ]);
+
+            ob_flush();
+            var_dump($shopHtml);die;
+        }
+
+        return $shops ?? [];
     }
 }

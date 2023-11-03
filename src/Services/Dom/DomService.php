@@ -4,51 +4,30 @@ namespace Gotyefrid\ComebackpwParser\Services\Dom;
 
 use DOMDocument;
 use DOMElement;
+use DOMNodeList;
 use DOMXPath;
 use Gotyefrid\ComebackpwParser\Base\BaseObject;
 use Gotyefrid\ComebackpwParser\Models\BaseItem;
-use Gotyefrid\ComebackpwParser\Models\Coordinates;
-use Gotyefrid\ComebackpwParser\Models\Shop;
-use Gotyefrid\ComebackpwParser\Models\ShopOwner;
 use Gotyefrid\ComebackpwParser\Services\Interfaces\DomFinderInterface;
 
 class DomService extends BaseObject implements DomFinderInterface
 {
-    public function getFilledItems(string $html): array
+    public function getShopsHtml(string $html): array
     {
-        $pageHtml = self::createDomDocument($html);
-        $xpath = new DOMXpath($pageHtml);
+        $xpath = self::createDomDocument($html);
         /** @var DOMElement[] $shopsData */
         $shopsData = $xpath->query("//div[@class='cats__item']");
 
         foreach ($shopsData as $shopData) {
-            $shopHtml = $shopData->ownerDocument->saveHTML($shopData);
-            $shopHtmlQuery = self::createDomDocument($shopHtml);
-            $shopXpath = new DOMXpath($shopHtmlQuery);
-
-            $id = $shopData->getAttribute('data-id');
-            $coordsWithRegion = $shopXpath->query("//p[@class='coordinate']")[0]?->textContent;
-
-            $shopModels[] = new Shop([
-                'id' => $id,
-                'owner' => new ShopOwner([
-                    'id' => $id,
-                    'nickname' => $shopXpath->query("//p[@class='charactername']")[0]?->textContent,
-                ]),
-                'name' => $shopXpath->query("//p[@class='catname']")[0]?->textContent,
-                'coordinates' => (new Coordinates())->map($coordsWithRegion),
-                'html' => $shopHtml
-            ]);
+            $shopHtml[] = $shopData->ownerDocument->saveHTML($shopData);
         }
 
-        return $shopModels ?? [];
+        return $shopHtml ?? [];
     }
 
     public function getItemsMain(string $shopHtml): array
     {
-        $shopElement = self::createDomDocument($shopHtml);
-        $xpath = new DOMXpath($shopElement);
-
+        $xpath = self::createDomDocument($shopHtml);
         $itemsDom = $xpath->query("//img[@class='ibs_img']");
 
         foreach ($itemsDom as $item) {
@@ -65,13 +44,42 @@ class DomService extends BaseObject implements DomFinderInterface
     /**
      * Добавяем строку перед html чтобы избежать проблем с кодировкой кириллицы
      * @param $html
-     * @return DOMDocument
+     * @return DOMXPath
      */
-    private static function createDomDocument($html): DOMDocument
+    private static function createDomDocument($html): DOMXpath
     {
         $dom = new DOMDocument();
         @$dom->loadHTML('<?xml encoding="utf-8" ?>' . $html);
 
-        return $dom;
+        return new DOMXpath($dom);
+    }
+
+    public function isExistMore(string $shopHtml): bool
+    {
+        $query = self::createDomDocument($shopHtml);
+
+        /** @var DOMNodeList $existMore */
+        $existMore = $query->query("//div[@class='its_button']");
+
+        if ($existMore->length) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getShopId(string $shopHtml)
+    {
+        $query = self::createDomDocument($shopHtml);
+
+        return $query->query("//div[@class='cats__item']")[0]->getAttribute('data-id');
+    }
+
+    public function getShopHtml(string $html)
+    {
+        $query = self::createDomDocument($html);
+        $shopHtml = $query->query("//div[@class='shop_window']")[0];
+
+        return $shopHtml->ownerDocument->saveHTML($shopHtml);
     }
 }

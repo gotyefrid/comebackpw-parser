@@ -37,21 +37,25 @@ class Shop extends BaseObject
     public array $items = [];
 
     public string $html = '';
+    public bool $isExistMore = false;
 
-    public function isAllItemsVisible(): bool
+    public function __construct(string $html, array $config = [])
     {
-        if ($this->html) {
-            $query = new PhpQuery();
-            $query->load_str($this->html);
-
-            /** @var DOMNodeList $existMore */
-            $existMore = $query->xpath("//div[@class='its_button']");
-
-            if ($existMore->length) {
-                return false;
-            }
+        if ($this->isExistMore) {
+            $this->mapFromShop();
+        } else {
+            $this->map();
         }
 
-        return true;
+        parent::__construct($config);
+    }
+
+    private function map()
+    {
+
+    }
+
+    private function mapFromShop()
+    {
     }
 }

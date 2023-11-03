@@ -12,7 +12,7 @@ use PhpQuery\PhpQuery;
 
 class PhpQueryDomService extends BaseObject implements DomFinderInterface
 {
-    public function getFilledItems(string $html): array
+    public function getShopsHtmls(string $html): array
     {
         $pageHtml = new PhpQuery();
         $pageHtml->load_str($html);

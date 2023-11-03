@@ -6,5 +6,5 @@ use Gotyefrid\ComebackpwParser\Models\ShopItem;
 
 interface DomFinderInterface
 {
-    public function getFilledItems(string $html): array;
+    public function getShopsHtml(string $html): array;
 }

@@ -15,5 +15,18 @@ services:
       - "host.docker.internal:host-gateway"
     networks:
       - backend
+
+  selenium:
+    container_name: selenium
+    build:
+      context: ./docker/
+      dockerfile: webdriver/Dockerfile
+    ports:
+      - "4444:4444"
+    volumes:
+      - /dev/shm:/dev/shm
+    networks:
+      - backend
+
 networks:
   backend:
