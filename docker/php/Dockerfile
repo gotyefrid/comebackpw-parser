@@ -9,4 +9,9 @@ RUN docker-php-ext-enable xdebug
 COPY ./php/xdebug.ini /usr/local/etc/php/conf.d
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Установить zip расширение
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
+    install-php-extensions zip
+
+
 WORKDIR /var/www/

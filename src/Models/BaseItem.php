@@ -3,6 +3,7 @@
 namespace Gotyefrid\ComebackpwParser\Models;
 
 use Gotyefrid\ComebackpwParser\Base\BaseObject;
+use Gotyefrid\ComebackpwParser\Services\Dom\DomService;
 
 /**
  * Базовый класс предмета
@@ -23,4 +24,22 @@ class BaseItem extends BaseObject
      * @var int Количество предметов в продаже
      */
     public int $count = 1;
+
+
+    public static function createMultipleFromHtml(string $html): array
+    {
+        $dom = DomService::createDomDocument($html);
+        $items = $dom->query("//img[@data-desc]");
+
+        foreach ($items as $item) {
+            $predmet = new static();
+            $predmet->name = $item->getAttribute('data-name');
+            $predmet->count = $item->getAttribute('data-count');
+            $predmet->price = $item->getAttribute('data-price');
+
+            $array[] = $predmet;
+        }
+
+        return $array ?? [];
+    }
 }

@@ -4,6 +4,7 @@ namespace Gotyefrid\ComebackpwParser\Models;
 
 use DOMNodeList;
 use Gotyefrid\ComebackpwParser\Base\BaseObject;
+use Gotyefrid\ComebackpwParser\Services\Dom\DomService;
 use PhpQuery\PhpQuery;
 
 /**
@@ -37,25 +38,37 @@ class Shop extends BaseObject
     public array $items = [];
 
     public string $html = '';
-    public bool $isExistMore = false;
 
     public function __construct(string $html, array $config = [])
     {
-        if ($this->isExistMore) {
-            $this->mapFromShop();
-        } else {
-            $this->map();
-        }
-
         parent::__construct($config);
+
+        if ($html) {
+            $this->html = $html;
+            $this->map();
+        } else {
+            throw new \Exception('Не передан html код магазина');
+        }
     }
 
     private function map()
     {
-
+        $this->name = $this->parseName();
+        $this->coordinates = Coordinates::createFromHtml($this->html);
+        $this->owner = ShopOwner::createFromHtml($this->html);
+        $this->items = BaseItem::createMultipleFromHtml($this->html);
+        $rf = 13;
     }
 
-    private function mapFromShop()
+    private function parseName()
     {
+        $dom = DomService::createDomDocument($this->html);
+        $name = $dom->query("//p[@class='catname']");
+
+        if (!isset($name[0])) {
+            $name = $dom->query("//p[@class='nameshop']");
+        }
+
+        return $name[0]->textContent;
     }
 }

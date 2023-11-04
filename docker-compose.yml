@@ -2,7 +2,6 @@ version: '3.0'
 
 services:
   php:
-    container_name: comebackpw-parser-php
     build:
       context: ./docker/
       dockerfile: php/Dockerfile
@@ -17,7 +16,7 @@ services:
       - backend
 
   selenium:
-    container_name: selenium
+    image: selenium/standalone-chrome:latest
     build:
       context: ./docker/
       dockerfile: webdriver/Dockerfile

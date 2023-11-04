@@ -46,7 +46,7 @@ class DomService extends BaseObject implements DomFinderInterface
      * @param $html
      * @return DOMXPath
      */
-    private static function createDomDocument($html): DOMXpath
+    public static function createDomDocument($html): DOMXpath
     {
         $dom = new DOMDocument();
         @$dom->loadHTML('<?xml encoding="utf-8" ?>' . $html);
@@ -62,10 +62,10 @@ class DomService extends BaseObject implements DomFinderInterface
         $existMore = $query->query("//div[@class='its_button']");
 
         if ($existMore->length) {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     public function getShopId(string $shopHtml)
@@ -79,6 +79,10 @@ class DomService extends BaseObject implements DomFinderInterface
     {
         $query = self::createDomDocument($html);
         $shopHtml = $query->query("//div[@class='shop_window']")[0];
+
+        if (!$shopHtml) {
+            throw new \Exception();
+        }
 
         return $shopHtml->ownerDocument->saveHTML($shopHtml);
     }

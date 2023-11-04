@@ -16,4 +16,4 @@ recreate:				## Пересобрать все контейнеры игнори�
 	docker-compose -f ./docker-compose-dev.yml up -d --force-recreate
 
 run-php:				## Зайти в консоль контейнера PHP
-	docker exec -it comebackpw-parser-php sh
+	docker exec -it comebackpw-parser-php-1 sh
