@@ -1,0 +1,323 @@
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <base href="https://comeback.pw/templates/cats/">
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="База котов сервера ComebackPW">
+    <meta name="keywords"
+          content="pwcats, сервер, серв, pvp, пвп, pw, perfect world, пв, перфект ворлд, онлайн, игры, prg, mmorpg, mmo, pve, пве, x1, x2, mmotop, скачать пв, пвппве">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=16">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <link rel="preload" href="css/style.css?v=16" as="style"/>
+    <title>База котов - ComebackPW</title>
+</head>
+<body>
+<div class="page">
+    <div class="page__background">
+        <div class="page__container">
+            <div class="menu">
+                <a href="/" class="site_button" alt="Сайт"></a>
+                <div class="status">
+                    <!-- Статус сервера 136 -->
+                    <img src="img/online_new.png" alt="Статус 136" class="status136">
+                    <!-- Онлайн(чел.) сервера 136 -->
+                    <p class="online136">3067</p>
+                    <!-- Онлайн(чел.) сервера 146 -->
+                    <p class="online146">3882</p>
+                    <!-- Онлайн(чел.) сервера 146x -->
+                    <p class="online146x">3359</p>
+                    <!-- Статус сервера 146 -->
+                    <img src="img/online_new.png" alt="Статус 146" class="status146">
+                    <!-- Статус сервера 146x -->
+                    <img src="img/online_new.png" alt="Статус 146x" class="status146x">
+                </div>
+                <a href="https://forum.comeback.pw/" class="forum_button" alt="Форум" target="_blank"></a>
+            </div>
+            <!-- Актуальные предметы -->
+            <div class="favorite">
+                <div class="choice_actual active"></div>
+                <div class="choice_favorite"></div>
+                <div class="choice_category"></div>
+            </div>
+            <div class="actual">
+                <div class="items matrix" id="items_block">
+                    <img src="https://x.comeback.pw/img/ico_items/5aSp5LmL5piK6ZWcLmRkcw==.jpg"
+                         data-name="Камень бессмертных"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Самое большое вместилище  божественной силы в Идеальном мире.&lt;br&gt;Божественный Камень собирает Значение Духа всех других камней,&lt;br&gt;обладая при этом силой солнца и луны.&lt;/font&gt;"
+                         class="item" data-id="11208">
+                    <img src="https://x.comeback.pw/img/ico_items/6buE5piP5oiY6a2C56S85YyFLmRkcw==.jpg"
+                         data-name="Сокровище прошлого"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;92% - Идеальный приз - 15 шт.&lt;br&gt;2.8% - Отличный приз&lt;br&gt;2.5% - Нашивка офицера-призрака - 4 шт.&lt;br&gt;1.0% - Платиновый идол&lt;br&gt;1.0% - Платиновый амулет&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;0.1% - Эмблема города Инея·воин&lt;br&gt;0.1% - Золотая монета&lt;br&gt;0.05% - Душа меча&lt;br&gt;0.05% - Книга судьбы&lt;br&gt;0.05% - Камень Нюйва&lt;br&gt;0.05% - Камень Сюань Юань&lt;br&gt;0.05% - Камень Джунглей&lt;br&gt;0.05% - Шкатулка таинственного света&lt;br&gt;0.05% - Награда истинному чемпиону&lt;br&gt;0.05% - Загадочная шкатулка&lt;br&gt;0.03% - Украшение·Знак луны&lt;br&gt;0.03% - Оружие·Знак луны&lt;br&gt;0.03% - Крылья бога удачи&lt;br&gt;0.025% - Алмазная броня&lt;br&gt;0.025% - Каменная броня&lt;br&gt;0.020% - ★Крылья Пегаса&lt;br&gt;0.020% - Знак командира&lt;br&gt;0.020% - Печать Куба&lt;br&gt;0.010% - ★★Полный контроль ситуации&lt;br&gt;0.010% - ★★Длань управляющая тучами&lt;br&gt;0.009% - Божественный свиток&lt;br&gt;0.008% - ★★Плащ·Несравненный&lt;/font&gt;"
+                         class="item" data-id="31371">
+                    <img src="https://x.comeback.pw/img/ico_items/6ay85biG5oiSLmRkcw==.jpg" data-name="★Кольцо Линь Юня"
+                         data-desc="" class="item" data-id="8384">
+                    <img src="https://x.comeback.pw/img/ico_items/5a6M576O5LiK562+LmRkcw==.jpg"
+                         data-name="Идеальный приз"
+                         data-desc="&lt;font color=&quot;#aaaaaa&quot;&gt;Поздравляем, сегодня вам улыбнулась удача!&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#ffcb4a&quot;&gt;Вы можете обменять ваш приз на новое снаряжение.&lt;/font&gt;"
+                         class="item" data-id="24721">
+                    <img src="https://x.comeback.pw/img/ico_items/5YW96aqo6aG56ZO+LmRkcw==.jpg"
+                         data-name="☆Ожерелье из звериной кости" data-desc="" class="item" data-id="259">
+                    <img src="https://x.comeback.pw/img/ico_items/5aS055uUMi5kZHM=.jpg" data-name="★Воинственный дух"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Шлем, в котором заключена частица силы духа войны.&lt;/font&gt;"
+                         class="item" data-id="20458">
+                    <img src="https://x.comeback.pw/img/ico_items/5oiQ5bCx5LmL57+856We5pyILmRkcw==.jpg"
+                         data-name="Крылья бога удачи"
+                         data-desc="&lt;font color=&quot;#aaaaaa&quot;&gt;Редкое сокровище из Долины бога, которое можно обменять на плащ.&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#ffcb4a&quot;&gt;Такие предметы собирает один из жителей Города Драконов.&lt;/font&gt;"
+                         class="item" data-id="25150">
+                    <img src="https://x.comeback.pw/img/ico_items/6YeR6bOeLmRkcw==.jpg" data-name="Золотая чешуйка"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Материал для изготовления золотого камня медитации.&lt;/font&gt;"
+                         class="item" data-id="36640">
+                    <img src="https://x.comeback.pw/img/ico_items/6ZKd54iqLmRkcw==.jpg" data-name="Тупой коготь"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Останки диких тварей.&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;Используются для квеста 'Поиск драконов: Я Цы' (31)&lt;/font&gt;"
+                         class="item" data-id="8105">
+                    <img src="https://x.comeback.pw/img/ico_items/6buE6YeR6YCa55So5oqr6aOOMTIuZGRz.jpg"
+                         data-name="★Шкура бычьего короля" data-desc="" class="item" data-id="9372">
+                    <img src="https://x.comeback.pw/img/ico_items/6YeR5LmL57K+5Y2OLmRkcw==.jpg" data-name="Полиматериал"
+                         data-desc="" class="item" data-id="15461">
+                    <img src="https://x.comeback.pw/img/ico_items/5L+u6KGM6KKNLmRkcw==.jpg"
+                         data-name="☆Тренировочная броня" data-desc="" class="item" data-id="154">
+                    <img src="https://x.comeback.pw/img/ico_items/57uT5Li555+zLmRkcw==.jpg" data-name="Камень познания"
+                         data-desc="&lt;font color=&quot;#aaaaaa&quot;&gt;Этот эликсир позволяет значительно ускорить развитие персонажа.&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#ffcb4a&quot;&gt;Откройте панель действий и выберите 'Восстановление духа', чтобы войти в меню повышенного опыта.&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;Время восстановления духа - срок, на который получаемый опыт удваивается.&lt;br&gt;Время опустошения духа - срок, на который получаемый опыт сокращается (до 10% от нормального).&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#ffcb4a&quot;&gt;Восстановление духа можно сочетать со свитками удвоения опыта.&lt;/font&gt;"
+                         class="item" data-id="27424">
+                    <img src="https://x.comeback.pw/img/ico_items/6ZW~55u45a6ILmRkcw==.jpg"
+                         data-name="★Парные мечи Шень Ло"
+                         data-desc="&lt;font color=&quot;#00ffff&quot;&gt;Разрушается в &lt;/font&gt;&lt;font color=&quot;#00ffae&quot;&gt;дух оружия: мечи Шень Ло.&lt;/font&gt;"
+                         class="item" data-id="14815">
+                    <img src="https://x.comeback.pw/img/ico_items/6b6Z6IW+5oiY55uULmRkcw==.jpg"
+                         data-name="★Шлем Львиного сердца" data-desc="" class="item" data-id="8346">
+                    <img src="https://x.comeback.pw/img/ico_items/6YGX6K6t5Yi75paHLmRkcw==.jpg"
+                         data-name="Божественный свиток"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Можно обменять у торговки Юн на небесный трактат.&lt;/font&gt;"
+                         class="item" data-id="24725">
+                    <img src="https://x.comeback.pw/img/ico_items/5YuH5aOr5aWW56ugMi5kZHM=.jpg" data-name="Орден славы"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Очень редкий предмет. Позволяет создавать снаряжение 9 ранга.&lt;/font&gt;"
+                         class="item" data-id="28350">
+                    <img src="https://x.comeback.pw/img/ico_items/5q275rK86YeN6Z20LmRkcw==.jpg"
+                         data-name="★Сапоги ловца душ" data-desc="" class="item" data-id="8339">
+                    <img src="https://x.comeback.pw/img/ico_items/55m+6I2J6ZyyLmRkcw==.jpg" data-name="Травяная роса"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Таинственный предмет, обладающий загадочной силой.&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;Используется для квеста 'Поиск драконов: Я Цы' (31)&lt;/font&gt;"
+                         class="item" data-id="8110">
+                    <img src="https://x.comeback.pw/img/ico_items/d2ludGVyYm94Y21rLmRkcw==.jpg"
+                         data-name="Ларец Деда Мороза" data-desc="" class="item" data-id="52427">
+                    <img src="https://x.comeback.pw/img/ico_items/5YWD57Sg57K+5Y2OLmRkcw==.jpg"
+                         data-name="Сущность элементаля"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Останки призрачных существ.&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;Используются для квеста 'Поиск драконов: Цзюнь Ни' (61)&lt;/font&gt;"
+                         class="item" data-id="8135">
+                    <img src="https://x.comeback.pw/img/ico_items/5YyV6aaWMDkuZGRz.jpg" data-name="★Шип полумесяца"
+                         data-desc="&lt;font color=&quot;#00ffff&quot;&gt;Разрушается в &lt;/font&gt;&lt;font color=&quot;#00ffae&quot;&gt;дух оружия: Лунные кинжалы.&lt;/font&gt;"
+                         class="item" data-id="26092">
+                    <img src="https://x.comeback.pw/img/ico_items/6KKr6Kej6K+755qE5Y236L20LmRkcw==.jpg"
+                         data-name="Награда истинному чемпиону"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Свидетельство вашей победы в состязании Арены.&lt;br&gt;Его можно обменять в центре выдачи призов арены на 'Дух воина'&lt;br&gt;или отдать старейшине Города Драконов, чтобы получить превосходный шлем.&lt;/font&gt;"
+                         class="item" data-id="20513">
+                    <img src="https://x.comeback.pw/img/ico_items/5LuZ54G155uULmRkcw==.jpg" data-name="★Шлем пиратов"
+                         data-desc="" class="item" data-id="8348">
+                    <img src="https://x.comeback.pw/img/ico_items/5YyF6KO55qCP5omp5YWF55+zLmRkcw==.jpg"
+                         data-name="Супер-камень инвентаря"
+                         data-desc="Обновленная версия.&lt;br&gt;&lt;font color=&quot;#ffcb4a&quot;&gt;Увеличивает инвентарь до &lt;/font&gt;&lt;font color=&quot;#ff0000&quot;&gt;128 ячеек!&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;Нажмите ПКМ, чтобы использовать.&lt;/font&gt;"
+                         class="item" data-id="23362">
+                    <img src="https://x.comeback.pw/img/ico_items/57KX5pyo5paZLmRkcw==.jpg" data-name="Пиломатериалы"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Древесина низкого уровня.&lt;br&gt;Используется при создании снаряжения. &lt;/font&gt;"
+                         class="item" data-id="796">
+                    <img src="https://x.comeback.pw/img/ico_items/5aSp5LmmX+mjjuiZjuS6kem+mS5kZHM=.jpg"
+                         data-name="Ветер тигров - облака драконов"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Сила +13&lt;br&gt;Телосложение +12&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;Это судьба - встретить все сложности.&lt;/font&gt;"
+                         class="item" data-id="17600">
+                    <img src="https://x.comeback.pw/img/ico_items/5aSp5LmmX+iPqeaPkOaYjumVnC5kZHM=.jpg"
+                         data-name="Рождественское поздравление"
+                         data-desc="&lt;font color=&quot;#ffcb4a&quot;&gt;Шанс критического удара +1%&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#00ffff&quot;&gt;Молитесь о счастье, мире и благоденствии.&lt;/font&gt;"
+                         class="item" data-id="23526">
+                    <img src="https://x.comeback.pw/img/ico_items/5peL6b6f5aOzLmRkcw==.jpg"
+                         data-name="Барабан разрушения"
+                         data-desc="&lt;font color=&quot;#00ffff&quot;&gt;Уровень материала: 60&lt;br&gt;&lt;/font&gt;&lt;font color=&quot;#ffcb4a&quot;&gt;Реликвия из Сумеречного храма. Используется для создания ценных предметов.&lt;/font&gt;"
+                         class="item" data-id="15228">
+                    <img src="https://x.comeback.pw/img/ico_items/5b2x6YGB6aG56ZO+LmRkcw==.jpg"
+                         data-name="★Сила командира" data-desc="" class="item" data-id="14013">
+                </div>
+                <div class="scroll_div none" id="scroll_div">
+                    <div class="scroll_btn scroll_up_btn"></div>
+                    <div class="scroll_btn scroll_down_btn"></div>
+                </div>
+            </div>
+            <!--  -->
+            <div class="market">
+                <div class="market__trade">
+                    <!-- Поиск -->
+                    <div class="trade__search">
+                        <form action="/cats/146x/" method="get">
+                            <input type="search" required minlength="2" name="find_item" id="trade__input"
+                                   placeholder="Поиск..." maxlength="40">
+                            <select id="trade__select" name="type">
+                                <option value="1">Название предмета</option>
+                                <option value="2">Название магазина</option>
+                                <option value="3">Ник продавца</option>
+                            </select>
+                            <input type="submit" value="" id="trade__find" alt="Найти">
+                        </form>
+                    </div>
+                    <div id="content">
+                        <!-- Страница с лавкой -->
+                        <div class="trade__cats_shop">
+                            <div class="shop_window">
+                                <div class="shop_close"></div>
+                                <div class="shop_container">
+                                    <div class="sell_wrapper">
+                                        <div class="container_sell">
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6JmO5aS055uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Шлем Голова тигра"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Шлем Голова тигра +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +63&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  44/44&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 6&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 9&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="322">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6JmO5aS055uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Шлем Голова тигра"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Шлем Голова тигра +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +63&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  44/44&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 6&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 9&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="322">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6JmO5aS055uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Шлем Голова тигра"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Шлем Голова тигра +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +63&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  44/44&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 6&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 9&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="322">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                            <div>
+                                                <img src="https://x.comeback.pw/img/ico_items/6ZOc55uULmRkcw==.jpg"
+                                                     class="item_shop" data-name="☆Бронзовый шлем"
+                                                     data-desc="&lt;p class=&quot;info_item_name&quot;&gt;☆Бронзовый шлем +3&lt;/p&gt;&lt;div class='price_container'&gt;&lt;p class='info_item_price'&gt;Цена:&lt;/p&gt;&lt;p class='info_item_value'&gt;3,400,000 &lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;info_hr&quot;&gt;&lt;/div&gt;&lt;div class=&quot;desc_container&quot;&gt;&lt;p class=&quot;info_item_first&quot;&gt;&lt;div class='itemdata__info'&gt;&lt;div class='itemdata__info-param'&gt;Здоровье +47&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Прочность  34/34&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемый уровень: 1&lt;/div&gt;&lt;div class='itemdata__info-param'&gt;Требуемая сила: 5&lt;/div&gt;&lt;div class='itemdata__info-addons'&gt;&lt;/div&gt;&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;"
+                                                     data-price="3400000" data-count="1" data-id="319">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="buy_wrapper">
+                                        <div class="container_buy">
+                                        </div>
+                                    </div>
+                                    <div class="shop_charactername"><p class="nameshop"><span class="footer_title_shop">Магазин</span>
+                                        +3 +3 +3 +3 <span class="coordinate_shop">118 861 <b>Мир ГИ</b></span></p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="market__server">
+                    <div class="server__choice">
+                        <a class="choice_136" href="/cats/136/"></a>
+                        <a class="choice_146" href="/cats/146/"></a>
+                        <a class="choice_146x active" href="/cats/146x/"></a>
+                    </div>
+                    <div class="server__menu">
+                        <a href="https://forum.comeback.pw/threads/%D0%A2%D0%BE%D1%80%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F-%D0%BA%D0%B0%D1%80%D1%82%D0%B0-%D0%93%D0%BE%D1%80%D0%BE%D0%B4%D0%B0-%D0%94%D1%80%D0%B0%D0%BA%D0%BE%D0%BD%D0%BE%D0%B2-comeback-pw-1-3-6.4324/"
+                           class="menu_catsmap" alt="Карта Котов" target="_blank"></a>
+                        <a href="https://136.comeback.pw" class="menu_lk136" alt="Личный кабинет 1.3.6"
+                           target="_blank"></a>
+                        <a href="https://lk.comeback.pw" class="menu_lk146" alt="Личный кабинет 1.4.6"
+                           target="_blank"></a>
+                        <a href="https://x.comeback.pw" class="menu_lk146x" alt="Личный кабинет 1.4.6x"
+                           target="_blank"></a>
+                    </div>
+                    <!-- Голд -->
+                    <div class="server__gold">
+                        <div class="gold_buy">
+                            <p class="buy_price">682800<span>270</span></p>
+                            <p class="buy_price">682700<span>170</span></p>
+                            <p class="buy_price">682600<span>287</span></p>
+                            <p class="buy_price">682500<span>287</span></p>
+                            <p class="buy_price">682400<span>30</span></p>
+                            <p class="buy_price">682200<span>10</span></p>
+                            <p class="buy_price">682100<span>320</span></p>
+                            <p class="buy_price">682000<span>270</span></p>
+                            <p class="buy_price">681100<span>15</span></p>
+                            <p class="buy_price">681000<span>200</span></p>
+                        </div>
+                        <div class="gold_sell">
+                            <p class="sell_price">717400<span>39</span></p>
+                            <p class="sell_price">717500<span>238</span></p>
+                            <p class="sell_price">717600<span>35</span></p>
+                            <p class="sell_price">717700<span>137</span></p>
+                            <p class="sell_price">717800<span>3</span></p>
+                            <p class="sell_price">717900<span>275</span></p>
+                            <p class="sell_price">719200<span>56</span></p>
+                            <p class="sell_price">719300<span>103</span></p>
+                            <p class="sell_price">719500<span>60</span></p>
+                            <p class="sell_price">720000<span>200</span></p>
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+            <footer class="footer"><p class="footer_text">ComebackPW 2020-2022 - все права принадлежат
+                правообладателям.</p></footer>
+        </div>
+    </div>
+</div>
+<style>
+    .tippy-box {
+        background-color: unset;
+    }
+
+    .tippy-box[data-placement^=top] > .tippy-arrow:before {
+        bottom: 0;
+    }
+</style>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/tippy-bundle.umd.min.js"></script>
+<script>
+    var CATS = '146x';
+</script>
+<script src="js/cats.js?v=10"></script>
+</body>
+</html>

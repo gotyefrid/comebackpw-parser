@@ -16,7 +16,11 @@ class ShopOwner extends BaseObject
     public string $nickname = '';
 
 
-    public static function createFromHtml(string $html)
+    /**
+     * @param string $html Код магазина (может быть из общей страницы, а может быть из конкретного магазина)
+     * @return static
+     */
+    public static function createFromHtml(string $html): static
     {
         $dom = DomService::createDomDocument($html);
         $nickname = $dom->query("//p[@class='charactername']");

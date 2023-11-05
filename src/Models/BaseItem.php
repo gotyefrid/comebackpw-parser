@@ -25,7 +25,11 @@ class BaseItem extends BaseObject
      */
     public int $count = 1;
 
-
+    /**
+     * Заполнить данные предмета пакетно
+     * @param string $html конкретного предмета
+     * @return array
+     */
     public static function createMultipleFromHtml(string $html): array
     {
         $dom = DomService::createDomDocument($html);

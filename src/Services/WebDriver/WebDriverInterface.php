@@ -4,5 +4,10 @@ namespace Gotyefrid\ComebackpwParser\Services\WebDriver;
 
 interface WebDriverInterface
 {
-    public static function getHtml(string $url);
+    /**
+     * Получить содержимое по ссылке
+     * @param string $url
+     * @return string
+     */
+    public function getHtml(string $url): string;
 }

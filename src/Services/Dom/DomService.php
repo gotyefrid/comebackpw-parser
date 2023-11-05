@@ -6,12 +6,17 @@ use DOMDocument;
 use DOMElement;
 use DOMNodeList;
 use DOMXPath;
+use Exception;
 use Gotyefrid\ComebackpwParser\Base\BaseObject;
-use Gotyefrid\ComebackpwParser\Models\BaseItem;
-use Gotyefrid\ComebackpwParser\Services\Interfaces\DomFinderInterface;
+use Gotyefrid\ComebackpwParser\Services\Interfaces\DomServiceInterface;
 
-class DomService extends BaseObject implements DomFinderInterface
+class DomService extends BaseObject implements DomServiceInterface
 {
+    /**
+     * Получить массив кусков html кода, которые отвечают за строчку об одном магазине (из таблицы магазинов)
+     * @param string $html Общая страница со всеми котами (магазинами)
+     * @return array
+     */
     public function getShopsHtml(string $html): array
     {
         $xpath = self::createDomDocument($html);
@@ -25,23 +30,8 @@ class DomService extends BaseObject implements DomFinderInterface
         return $shopHtml ?? [];
     }
 
-    public function getItemsMain(string $shopHtml): array
-    {
-        $xpath = self::createDomDocument($shopHtml);
-        $itemsDom = $xpath->query("//img[@class='ibs_img']");
-
-        foreach ($itemsDom as $item) {
-            $items[] = new BaseItem([
-                'name' => $item->getAttribute('data-name'),
-                'count' => $item->getAttribute('data-count'),
-                'price' => $item->getAttribute('data-price'),
-            ]);
-        }
-
-        return $items ?? [];
-    }
-
     /**
+     * Создать ДОМ документ и вернуть инструмент поиска по нему через xPath
      * Добавяем строку перед html чтобы избежать проблем с кодировкой кириллицы
      * @param $html
      * @return DOMXPath
@@ -54,9 +44,14 @@ class DomService extends BaseObject implements DomFinderInterface
         return new DOMXpath($dom);
     }
 
-    public function isExistMore(string $shopHtml): bool
+    /**
+     * Видим ли мы все товары в этом магазине, или нет (на общей странице)
+     * @param string $shopGridHtml
+     * @return bool
+     */
+    public function isExistMoreButton(string $shopGridHtml): bool
     {
-        $query = self::createDomDocument($shopHtml);
+        $query = self::createDomDocument($shopGridHtml);
 
         /** @var DOMNodeList $existMore */
         $existMore = $query->query("//div[@class='its_button']");
@@ -68,22 +63,59 @@ class DomService extends BaseObject implements DomFinderInterface
         return false;
     }
 
-    public function getShopId(string $shopHtml)
+    /**
+     * Вернуть ID магазина из куска html конкретного магазина с общей страницы
+     * @param string $shopHtml
+     * @return int
+     */
+    public function getShopId(string $shopHtml): int
     {
         $query = self::createDomDocument($shopHtml);
 
-        return $query->query("//div[@class='cats__item']")[0]->getAttribute('data-id');
+        return (int)$query->query("//div[@class='cats__item']")[0]->getAttribute('data-id');
     }
 
-    public function getShopHtml(string $html)
+    /**
+     * Получить html код отдельной страницы магазина
+     * @param string $html
+     * @return string
+     * @throws Exception
+     */
+    public function getFullShopHtml(string $html): string
     {
         $query = self::createDomDocument($html);
         $shopHtml = $query->query("//div[@class='shop_window']")[0];
 
         if (!$shopHtml) {
-            throw new \Exception();
+            throw new Exception('Не получен html конкретного магазина');
         }
 
         return $shopHtml->ownerDocument->saveHTML($shopHtml);
+    }
+
+    /**
+     * Проверить в коде общей страницы магазинов последняя ли это страница
+     * @param string $html
+     * @return bool
+     * @throws Exception
+     */
+    public function checkIsLastPage(string $html): bool
+    {
+        $dom = self::createDomDocument($html);
+        /** @var DOMNodeList $nextButton */
+        $nextButton = $dom->query('//button[@class="pagination_button" and text()="Вперед"]');
+
+        if (isset($nextButton[0])) {
+            /** @var DOMElement $btn */
+            $btn = $nextButton[0];
+
+            if ((int)$btn->hasAttribute('data-page')) {
+                return false;
+            }
+
+            return true;
+        }
+
+        throw new Exception('Не найдена предпоследняя кнопка пагинации');
     }
 }

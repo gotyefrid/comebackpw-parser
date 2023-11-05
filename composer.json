@@ -15,7 +15,8 @@
         "php": "^8.0",
         "phpquery/phpquery": "^0.0.4",
         "ext-dom": "*",
-        "php-webdriver/webdriver": "1.15.1"
+        "php-webdriver/webdriver": "1.15.1",
+        "ext-curl": "*"
     },
     "require-dev": {
         "codeception/codeception": "4.2.2",

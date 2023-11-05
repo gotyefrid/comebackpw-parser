@@ -2,10 +2,9 @@
 
 namespace Gotyefrid\ComebackpwParser\Models;
 
-use DOMNodeList;
+use Exception;
 use Gotyefrid\ComebackpwParser\Base\BaseObject;
 use Gotyefrid\ComebackpwParser\Services\Dom\DomService;
-use PhpQuery\PhpQuery;
 
 /**
  * Модель магазина
@@ -37,8 +36,16 @@ class Shop extends BaseObject
      */
     public array $items = [];
 
+    /**
+     * @var string Код магазина (может быть из общей страницы, а может быть из конкретного магазина)
+     */
     public string $html = '';
 
+    /**
+     * @param string $html Код магазина (может быть из общей страницы, а может быть из конкретного магазина)
+     * @param array $config
+     * @throws Exception
+     */
     public function __construct(string $html, array $config = [])
     {
         parent::__construct($config);
@@ -47,20 +54,27 @@ class Shop extends BaseObject
             $this->html = $html;
             $this->map();
         } else {
-            throw new \Exception('Не передан html код магазина');
+            throw new Exception('Не передан html код магазина');
         }
     }
 
-    private function map()
+    /**
+     * Маппинг текущей модели и всех зависимостей
+     * @return void
+     */
+    private function map(): void
     {
         $this->name = $this->parseName();
         $this->coordinates = Coordinates::createFromHtml($this->html);
         $this->owner = ShopOwner::createFromHtml($this->html);
         $this->items = BaseItem::createMultipleFromHtml($this->html);
-        $rf = 13;
     }
 
-    private function parseName()
+    /**
+     * Получить имя магазина
+     * @return string
+     */
+    private function parseName(): string
     {
         $dom = DomService::createDomDocument($this->html);
         $name = $dom->query("//p[@class='catname']");

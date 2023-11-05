@@ -3,36 +3,51 @@
 namespace Gotyefrid\ComebackpwParser\Services\Parser;
 
 use Exception;
+use Generator;
 use Gotyefrid\ComebackpwParser\Base\BaseObject;
 use Gotyefrid\ComebackpwParser\Models\Shop;
-use Gotyefrid\ComebackpwParser\Models\ShopItem;
 use Gotyefrid\ComebackpwParser\Services\Dom\DomService;
-use Gotyefrid\ComebackpwParser\Services\Interfaces\DomFinderInterface;
+use Gotyefrid\ComebackpwParser\Services\Interfaces\DomServiceInterface;
 use Gotyefrid\ComebackpwParser\Services\WebDriver\Chrome;
 use Gotyefrid\ComebackpwParser\Services\WebDriver\WebDriverInterface;
 
 class ParserService extends BaseObject
 {
+    /**
+     * @var string версия где парсить
+     */
     public string $version = '146x';
+
+    /**
+     * @var string основной адрес
+     */
     public string $mainUrl = 'https://comeback.pw/cats/';
-    public ?DomFinderInterface $domFinder = null;
+
+    /**
+     * Сервис отвечающий за поиск данных в HTML
+     * @var DomServiceInterface|null
+     */
+    public ?DomServiceInterface $domService = null;
+
+    /**
+     * Класс ответственный за получение html по url
+     * @var WebDriverInterface|null
+     */
     public ?WebDriverInterface $webDriver = null;
-
-    public const TYPE_ALL = 1;
-    public const TYPE_ARMOR = 2;
-    public const TYPES = [
-        self::TYPE_ALL => 'all',
-        self::TYPE_ARMOR => 'armor'
-    ];
-
+    /**
+     * @var bool Указатель, последняя ли это страница
+     */
     public bool $isLastPage = true;
 
+    /**
+     * @inheritDoc
+     */
     public function __construct(array $config = [])
     {
         parent::__construct($config);
 
-        if (!$this->domFinder) {
-            $this->domFinder = new DomService();
+        if (!$this->domService) {
+            $this->domService = new DomService();
         }
 
         if (!$this->webDriver) {
@@ -40,41 +55,55 @@ class ParserService extends BaseObject
         }
     }
 
-    public function run(int $type = self::TYPE_ALL): ShopItem
-    {
-        $page = 1;
-
-        do {
-            $mainHtml = $this->getMainHtml($page);
-            $shopsHtml = $this->domFinder->getShopsHtml($mainHtml);
-            $shops[] = $this->createShops($shopsHtml);
-            //$this->isLastPage = $this->checkIsLastPage($mainHtml);
-            $this->isLastPage = true;
-            $page++;
-        } while ($this->isLastPage === false);
-
-        $r = 123;
-    }
-
     /**
-     * @param int $page
-     * @return Shop[]
-     * @throws Exception
+     * Получить текущую пачку результатов (магазинов)
+     * @param int $page Начальная страница
+     * @return Generator По факту возрващается заполненные модели Shop с текущей страницы
      */
-    public function getMainHtml(int $page): string
+    public function parsePage(int &$page = 1): Generator
     {
-        $html = $this->getHtml($this->getMainUrl(['page' => $page]));
+        while (true) {
+            $mainHtml = $this->getMainPageHtml($page);
+            $shopsHtml = $this->domService->getShopsHtml($mainHtml);
+            $shops = $this->createShops($shopsHtml);
+            $this->isLastPage = $this->checkIsLastPage($mainHtml);
+            $page++;
 
-        if ($this->isMainHtmlValid($html)) {
-            return $html;
-        } else {
-            throw new Exception('Основной html невалидный');
+            yield $shops;
         }
     }
 
+    /**
+     * Получить содержимое общей страницы с магазинами
+     * @param int $page
+     * @return string
+     * @throws Exception
+     */
+    public function getMainPageHtml(int $page): string
+    {
+        return $this->getHtml($this->getMainUrl(['page' => $page]));
+    }
+
+    /**
+     * Получить содержимое конкретного магазина
+     * @param int $shopId
+     * @return string
+     * @throws Exception
+     */
+    public function getShopPageHtml(int $shopId): string
+    {
+        return $this->getHtml($this->getShopUrl($shopId));
+    }
+
+    /**
+     * Получить содержимое страницы
+     * @param string $url
+     * @return string
+     * @throws Exception
+     */
     private function getHtml(string $url): string
     {
-        $html = $this->webDriver::getHtml($url);
+        $html = $this->webDriver->getHtml($url);
 
         if (!$html) {
             throw new Exception('Получили пустой html');
@@ -84,17 +113,23 @@ class ParserService extends BaseObject
     }
 
     /**
+     * Получить основной урл с указанными параметрами
      * @param array $query
      * @return string
      */
-    public function getMainUrl(array $query): string
+    private function getMainUrl(array $query): string
     {
         $query = http_build_query($query);
 
         return $this->mainUrl . $this->version . "?$query";
     }
 
-    public function getShopUrl(int $shopId): string
+    /**
+     * Получить урл конкретного магазина
+     * @param int $shopId
+     * @return string
+     */
+    private function getShopUrl(int $shopId): string
     {
         $query = [
             'shop' => $shopId
@@ -104,20 +139,22 @@ class ParserService extends BaseObject
         return $this->mainUrl . $this->version . "?$query";
     }
 
-    private function isMainHtmlValid(string $html): bool
-    {
-        return str_contains($html, '<div id="content">');
-    }
-
-    private function createShops(array $shopsHtml)
+    /**
+     * Создать модели магазинов с основной страницы, а если на основной странице не все товары -
+     * то зайти в конкретный магазин и спарсить все остальные товары
+     * @param array $shopsHtml Набор кусков кода магазинов из общей страницы
+     * @return array
+     * @throws Exception
+     */
+    private function createShops(array $shopsHtml): array
     {
         foreach ($shopsHtml as $shopHtml) {
-            $isExistMore = $this->domFinder->isExistMore($shopHtml);
-            $shopId = $this->domFinder->getShopId($shopHtml);
+            $isExistMore = $this->domService->isExistMoreButton($shopHtml);
+            $shopId = $this->domService->getShopId($shopHtml);
 
             if ($isExistMore) {
-                $shopHtml = $this->getHtml($this->getShopUrl($shopId));
-                $shopHtml = $this->domFinder->getShopHtml($shopHtml);
+                $shopHtml = $this->getShopPageHtml($shopId);
+                $shopHtml = $this->domService->getFullShopHtml($shopHtml);
             }
 
             $shops[] = new Shop($shopHtml, [
@@ -128,24 +165,14 @@ class ParserService extends BaseObject
         return $shops ?? [];
     }
 
-    private function checkIsLastPage(string $html)
+    /**
+     * Проверить последняя ли это страница
+     * @param string $html Код основной страницы с магазинами
+     * @return bool
+     * @throws Exception
+     */
+    private function checkIsLastPage(string $html): bool
     {
-        $dom = DomService::createDomDocument($html);
-        /** @var \DOMNodeList $nextButton */
-        $nextButton = $dom->query('//button[@class="pagination_button" and text()="Вперед"]');
-
-        if (isset($nextButton[0])) {
-            /** @var \DOMElement $btn */
-            $btn = $nextButton[0];
-
-            if ((int)$btn->hasAttribute('data-page')) {
-                return false;
-            }
-
-            return true;
-        }
-
-        throw new Exception('Не найдена предпоследняя кнопка пагинации');
-
+        return $this->domService->checkIsLastPage($html);
     }
 }
